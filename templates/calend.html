@@ -1,0 +1,46 @@
+{%extends "base.html" %}
+
+{% block content %}
+<div id="zuker">
+<div id = "sss" class = "padR alLeft"> Общий список матчей группового этапа </div>
+<br>
+</div>
+<div class="stat mB15">
+<table class="stat-table" cellpadding="0" cellspacing="0">
+<colgroup>
+<col width="110">
+<col width="185">
+<col width="60">
+<col width="185">
+<col width="110">
+</colgroup>
+<thead>
+<tr>
+<td class="name-td alLeft">Дата</td>
+<td class="owner-td">Хозяева</td>
+<td class="score-td">Счет</td>
+<td class="guests-td">Гости</td>
+<td class="padR alRight">Тур</td>
+<td class="padR alRight">Группа</td>
+</tr>
+</thead>
+<tbody>
+<tr>
+{% for pl in matchs %}
+{% if gr == pl.group or gr == "all" %}
+<td class="name-td alLeft">{{ pl.date }}<span class="sp">|</span></td>
+<td class="owner-td"><div class="rel"><a class="player" href="Onyx">{{ pl.team1 }}</a></div></td><td class="score-td"><noindex><b>{{ pl.goal1 }} : {{ pl.goal2 }}</b></noindex></a></td><td class="guests-td"><div class="rel"><a class="player" href="Legenda" >{{ pl.team2 }}</a></div></td>
+<td class="padR alRight">{{ pl.tour }}</td>
+<td class="padR alRight">{{ pl.group }}</td>
+</tr>
+{% endif %}
+{% endfor %}
+
+</tr>
+
+</tbody>
+</table>
+</div>
+</div>
+
+{%endblock%}

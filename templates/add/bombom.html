@@ -1,0 +1,30 @@
+{% if playerlist %}
+<table class="stat-table table" cellpadding="0" cellspacing="0">
+<colgroup>
+<col width="">
+<col width="34">
+</colgroup>
+<thead>
+<tr>
+<td class="name-td alLeft">Бомбардиры</td>
+<td>Г</td>
+</tr>
+</thead>
+<tbody>
+{% for player in playerlist %}
+<tr>
+<td class="name-td alLeft">
+<i class="flag-s flag-1310" title="Венесуэла" alt="Венесуэла"></i>
+<div class="name">
+<a href="player/{{ player.link }}" title="">{{ player.name }}</a>
+<span class="descr">{{ player.team }}</span>
+</div>
+</td>
+<td>{{ player.goals }}</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="more"><a href="/bombardiers/"><span>Полная статистика</span> <i class="arr-blk"></i></a></div>
+
+{% endif %}
