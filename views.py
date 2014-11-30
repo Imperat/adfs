@@ -32,7 +32,8 @@ l = dict()
 for i in Match.objects.all():
     if i.play == 'n':
         if i.team1 not in l.keys():
-            t = recOfTeam()
+            t = RecOfTeam()
+            t.gr = i.group
             l[i.team1] = t
     if i.play == 'y':
         if i.team1 in l.keys():
@@ -79,8 +80,8 @@ for i in Match.objects.all():
             l[i.team2].gr = i.group
             t = l[i.team2]
             t.playes = t.playes + 1
-            t.golsab = t.golsab + i.goal1
-            t.golprop = t.golprop + i.goal2
+            t.golsab = t.golsab + i.goal2
+            t.golprop = t.golprop + i.goal1
             if i.goal1 > i.goal2:
                 t.p = t.p + 1
             elif i.goal1 < i.goal2:
