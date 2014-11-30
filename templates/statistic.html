@@ -1,6 +1,9 @@
 {%extends "base.html" %}
 
 {% block content %}
+
+
+
 <div class="stat mB6">
 <table class="stat-table table sortable-table" cellpadding="0" cellspacing="0">
 <colgroup>
@@ -28,61 +31,19 @@
 </tr>
 </thead>
 <tbody>
+{% for i,j in info %}
 <tr>
 <td class="color1 bordR">1</td>
-<td class="name-td alLeft bordR"><div class="hide-field"><i class="fader"></i><i class="flag-s flag-1285" title="Россия" alt="Россия"></i><a class="name" href="http://www.sports.ru/zenit/" title="Зенит">ФКС</a></div></td>
-<td>7</td>
-<td>6</td>
-<td>1</td>
-<td>0</td>
-<td>34</td>
-<td>6</td>
-<td>19</td>
+<td class="name-td alLeft bordR"><div class="hide-field"><i class="fader"></i><i class="flag-s flag-1285" title="Россия" alt="Россия"></i><a class="name" href="http://www.sports.ru/zenit/" title="Зенит">{{ i }}</a></div></td>
+<td>{{j.playes}}</td>
+<td>{{j.v}}</td>
+<td>{{j.n}}</td>
+<td>{{j.p}}</td>
+<td>{{j.golsab}}</td>
+<td>{{j.golprop}}</td>
+<td>{{j.point}}</td>
 </tr>
-<tr>
-<td class="color1 bordR">2</td>
-<td class="name-td alLeft bordR"><div class="hide-field"><i class="fader"></i><i class="flag-s flag-1285" title="Россия" alt="Россия"></i><a class="name" href="http://www.sports.ru/cska/" title="ЦСКА">Шаркс</a></div></td>
-<td>7</td>
-<td>4</td>
-<td>0</td>
-<td>3</td>
-<td>34</td>
-<td>6</td>
-<td>19</td>
-</tr>
-<tr>
-<td class="bordR">3</td>
-<td class="name-td alLeft bordR"><div class="hide-field"><i class="fader"></i><i class="flag-s flag-1285" title="Россия" alt="Россия"></i><a class="name" href="http://www.sports.ru/krasnodar/" title="Краснодар">Звёздный</a></div></td>
-<td>12</td>
-<td>6</td>
-<td>3</td>
-<td>3</td>
-<td>20</td>
-<td>10</td>
-<td>21</td>
-</tr>
-<tr>
-<td class="bordR">4</td>
-<td class="name-td alLeft bordR"><div class="hide-field"><i class="fader"></i><i class="flag-s flag-1285" title="Россия" alt="Россия"></i><a class="name" href="http://www.sports.ru/kuban/" title="Кубань">Спарта</a></div></td>
-<td>12</td>
-<td>5</td>
-<td>6</td>
-<td>1</td>
-<td>15</td>
-<td>15</td>
-<td>21</td>
-</tr>
-<tr>
-<td class="bordR">5</td>
-<td class="name-td alLeft bordR"><div class="hide-field"><i class="fader"></i><i class="flag-s flag-1285" title="Россия" alt="Россия"></i><a class="name" href="http://www.sports.ru/dynamo/" title="Динамо">Оникс</a></div></td>
-<td>11</td>
-<td>6</td>
-<td>1</td>
-<td>4</td>
-<td>25</td>
-<td>18</td>
-<td>19</td>
-</tr>
+{% endfor %}
 </tbody>
 </table>
 </div>
