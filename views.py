@@ -2,13 +2,36 @@
 from django.http import HttpResponse
 from django.template.loader import render_to_string
 from adfs.models import Person, Match
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFont
 text = "Hello, Rasim!!!"
 color = (0, 0, 120)
 img = Image.new('RGB', (100, 50), color)
 imgDrawer = ImageDraw.Draw(img)
 imgDrawer.text((10, 20), text)
 img.save("/home/michaill/adfs/pil-basic-example.png")
+
+def create_image():
+    img = Image.open('/home/michaill/adfs/media/table.png')
+    font = ImageFont.truetype("/home/michaill/adfs/media/arial.ttf",15, encoding = "unic")
+    draw = ImageDraw.Draw(img)
+    k = 30
+    draw.text((43,10), u"Группа А", fill="black", font = font)
+    for i in filter(lambda x: x[1].gr == 'A', infon()):
+        draw.text((50,k), i[0], fill="black", font = font)
+        draw.text((285,k), str(i[1].playes), fill="black", font = font)
+        draw.text((330,k), str(i[1].v), fill="black", font = font)
+        draw.text((375,k), str(i[1].n), fill="black", font = font)
+        draw.text((420,k), str(i[1].p), fill="black", font = font)
+        draw.text((465,k), str(i[1].golsab), fill="black", font = font)
+        draw.text((510,k), str(i[1].golprop), fill="black", font = font)
+        draw.text((555,k), str(i[1].point()), fill="black", font = font)
+        k+=26
+    img.save('/home/michaill/adfs/static/tableA.png', 'PNG')
+
+f = open ("rasim.txt", "w")
+f.write("Rasim")
+f.close()
+
 
 class player:
     def __init__ (self, team,name,goals,link):
@@ -24,19 +47,28 @@ b = Person(name="Михаил Лелякин", team="Пыльник", goals=2, l
 
 class RecOfTeam:
     def __init__ (self):
+    	self.name = "Lool"
         self.playes  = 0
         self.v       = 0
         self.n       = 0
         self.p       = 0
         self.golprop = 0
         self.golsab  = 0
-        self.gr = 'Q'
+        self.gr = 'E'
 
     def point (self):
         return self.v*3 + self.n
 
     def rasn (self):
         return self.golsab - self.golprop
+
+    #Standard methods
+
+  #  def __lt__ (self,other):
+   #     if self.point < other.point:
+   #     	return true
+   #     elif self.point == other.point:
+   #     	if
 
 def infon ():
     l = dict()
@@ -45,6 +77,7 @@ def infon ():
             if i.team1 not in l.keys():
                 t = RecOfTeam()
                 t.gr = i.group
+                t.name = i.team1
                 l[i.team1] = t
         if i.play == 'y':
             if i.team1 in l.keys():
@@ -74,6 +107,7 @@ def infon ():
                     t.p = t.p + 1
                 else:
                     t.n = t.n + 1
+                t.name = i.team1
                 l[i.team1] = t
            #Индусский код. В ближайшее время точно переделать стоит его!
             if i.team2 in l.keys():
@@ -101,9 +135,10 @@ def infon ():
                     t.v = t.v + 1
                 else:
                   t.n = t.n + 1
+                t.name = i.team2
                 l[i.team2] = t
     #О-хо-хо
-    
+
     info = l.items()
     info.sort(key = lambda x: x[1].point())
     info.reverse()
@@ -142,6 +177,7 @@ def hello(request):
     return HttpResponse(rendered)
 
 def stat(request):
+    create_image()
     rendered = render_to_string('statistic.html', { 'playerlist': playerList(5), 'info':infon()})
     return HttpResponse(rendered)
 
