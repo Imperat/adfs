@@ -11,22 +11,23 @@ imgDrawer.text((10, 20), text)
 img.save("/home/michaill/adfs/pil-basic-example.png")
 
 def create_image():
-    img = Image.open('/home/michaill/adfs/media/table.png')
-    font = ImageFont.truetype("/home/michaill/adfs/media/arial.ttf",15, encoding = "unic")
-    draw = ImageDraw.Draw(img)
-    k = 30
-    draw.text((43,10), u"Группа А", fill="black", font = font)
-    for i in filter(lambda x: x[1].gr == 'A', infon()):
-        draw.text((50,k), i[0], fill="black", font = font)
-        draw.text((285,k), str(i[1].playes), fill="black", font = font)
-        draw.text((330,k), str(i[1].v), fill="black", font = font)
-        draw.text((375,k), str(i[1].n), fill="black", font = font)
-        draw.text((420,k), str(i[1].p), fill="black", font = font)
-        draw.text((465,k), str(i[1].golsab), fill="black", font = font)
-        draw.text((510,k), str(i[1].golprop), fill="black", font = font)
-        draw.text((555,k), str(i[1].point()), fill="black", font = font)
-        k+=26
-    img.save('/home/michaill/adfs/static/tableA.png', 'PNG')
+    for j in "ABCD":
+        img = Image.open('/home/michaill/adfs/media/table.png')
+        font = ImageFont.truetype("/home/michaill/adfs/media/arial.ttf",15, encoding = "unic")
+        draw = ImageDraw.Draw(img)
+        k = 30
+        draw.text((43,10), u"Группа " + j, fill="black", font = font)
+        for i in filter(lambda x: x[1].gr == j, infon()):
+            draw.text((50,k), i[0], fill="black", font = font)
+            draw.text((285,k), str(i[1].playes), fill="black", font = font)
+            draw.text((330,k), str(i[1].v), fill="black", font = font)
+            draw.text((375,k), str(i[1].n), fill="black", font = font)
+            draw.text((420,k), str(i[1].p), fill="black", font = font)
+            draw.text((465,k), str(i[1].golsab), fill="black", font = font)
+            draw.text((510,k), str(i[1].golprop), fill="black", font = font)
+            draw.text((555,k), str(i[1].point()), fill="black", font = font)
+            k+=26
+        img.save('/home/michaill/adfs/static/table'+ j + '.png', 'PNG')
 
 f = open ("rasim.txt", "w")
 f.write("Rasim")
