@@ -63,13 +63,53 @@ class RecOfTeam:
     def rasn (self):
         return self.golsab - self.golprop
 
-    #Standard methods
+    def __lt__ (self,other):
+        if self.point() < other.point():
+            return True
+        elif self.point() == other.point():
+            if retMatch(self.name, other.name) == 0:
+                if self.rasn() < other.rasn():
+                    return True
+                else:
+                    return False
+            if retMatch(self.name, other.name) == True:
+                return True
+            elif retMatch(self.name, other.name) == -1:
+                if self.rasn() < other.rasn():
+                    return True
+                else:
+                    return False
+            else:
+                return False
+    def __gt__(self, other):
+        if self.__lt__(other) == False:
+            return True
+        else:
+            return False
 
-  #  def __lt__ (self,other):
-   #     if self.point < other.point:
-   #     	return true
-   #     elif self.point == other.point:
-   #     	if
+
+def retMatch(team1, team2):
+    global t
+    global dencity
+    for i in Match.objects.all():
+        if i.team1 == team1 and i.team2 == team2:
+            t = i
+            dencity = True
+            break
+        elif i.team2 == team1 and i.team1 == team2:
+            t = i
+            dencity = False
+            break
+
+    if t.play == 'n':
+        return 0
+    else:
+        if i.goal1 > i.goal2:
+            return True ^ dencity
+        elif i.goal1 < i.goal2:
+            return False ^ dencity
+        else:
+            return -1
 
 def infon ():
     l = dict()
@@ -141,7 +181,7 @@ def infon ():
     #О-хо-хо
 
     info = l.items()
-    info.sort(key = lambda x: x[1].point())
+    info.sort(key = lambda x: x[1])
     info.reverse()
     return info
 
